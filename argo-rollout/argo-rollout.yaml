@@ -14,7 +14,7 @@ spec:
       - setWeight: 20
       - pause: {duration: 10}
       - setWeight: 40
-      - pause: {duration: 10}
+      - pause: {duration: 5m}
       - setWeight: 60
       - pause: {duration: 10}
       - setWeight: 80
@@ -31,7 +31,7 @@ spec:
       serviceAccountName: rollouts-demo
       containers:
       - name: rollouts-demo
-        image: argoproj/rollouts-demo:red
+        image: argoproj/rollouts-demo:blue
         ports:
         - name: http
           containerPort: 8080
