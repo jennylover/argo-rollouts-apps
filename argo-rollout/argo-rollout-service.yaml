@@ -8,5 +8,23 @@ spec:
     targetPort: http
     protocol: TCP
     name: http
+  type: NodePort
   selector:
     app: rollouts-demo
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rollouts-demo-ingress
+spec:
+  ingressClassName: alb
+  rules:
+  - http:
+      paths:
+      - path: /*
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: rollouts-demo
+            port:
+              number: 80

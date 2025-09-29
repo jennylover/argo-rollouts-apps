@@ -6,11 +6,15 @@ spec:
   replicas: 5
   strategy:
     canary:
+      analysis:
+        templates:
+        - templateName: cloudwatch-canary
+        startingStep: 2
       steps:
       - setWeight: 20
       - pause: {duration: 10}
       - setWeight: 40
-      - pause: {duration: 10}
+      - pause: {duration: 10m}
       - setWeight: 60
       - pause: {duration: 10}
       - setWeight: 80
@@ -24,9 +28,10 @@ spec:
       labels:
         app: rollouts-demo
     spec:
+      serviceAccountName: rollouts-demo
       containers:
       - name: rollouts-demo
-        image: argoproj/rollouts-demo:blue
+        image: argoproj/rollouts-demo:green
         ports:
         - name: http
           containerPort: 8080
