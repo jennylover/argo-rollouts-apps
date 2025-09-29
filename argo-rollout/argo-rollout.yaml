@@ -6,10 +6,6 @@ spec:
   replicas: 5
   strategy:
     canary:
-      analysis:
-        templates:
-        - templateName: cloudwatch-canary
-        startingStep: 2
       steps:
       - setWeight: 20
       - pause: {duration: 10}
